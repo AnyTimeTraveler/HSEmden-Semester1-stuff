@@ -1,0 +1,151 @@
+% *******************************************************************
+%   Latex example document for creating exercise sheets
+%   C.Koch | HS Emden/Leer | 27.10.2011
+% *******************************************************************
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[ngerman]{babel} % german language support
+\usepackage[T1]{fontenc}    % german language support
+\usepackage[utf8]{inputenc}	
+
+\usepackage{graphicx}       % import graphic files
+\usepackage{amsmath}		% fancy math symbols and fonts
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage [de]{hsel-uebungen2018}
+
+
+\begin{document}
+
+\setexheader{Gestaltung von Praktikums- und Prüfungsaufgaben}
+			{Prof. Dr. C.~Koch, L. Klitzke}{carsten.koch@hs-emden-leer.de}
+			{HS Emden/Leer, Fachbereich Technik \hfill Elektrotechnik und Informatik}
+			{\today}
+
+\begin{samepage}
+\printexheader
+	
+\printextitle{Das Paket {\emph{hsel-uebungen}}}
+%
+\printexreceipt
+\end{samepage}
+%
+
+
+\section{Einführung}
+%
+\subsection{Motivation}
+Dieses Dokument dient als Beispiel zur Nutzung des Pakets \tsetfile{hsel-uebungen.sty}, welches entworfen wurde, um als Vorlage für Praktikums- als auch Prüfungsaufgabenblätter für {\LaTeX} an der Hochschule Emden/Leer zu dienen.
+
+Ein zentraler Bestandteil hierbei ist die Verwaltung von Aufgabennummerierungen und Punkten, die für einzelne Aufgaben und Teilaufgaben vergeben werden. Hierzu werden neue interne Zähler erzeugt, die unabhängig von Standardbefehlen zur Dokumentstrukturierung, wie beispielsweise \tsetprog{\section}oder \tsetprog{\subsection}\hspace{-2mm}, agieren.\\ Dabei werden die Punkte zu allen Fragestellungen innerhalb einer Aufgabe summiert und am rechten Seitenrand ausgegeben. Zusätzlich wird eine Endsumme aus allen zu erreichenden Punkten gebildet. Dazu wird ein Zähler aus dem Paket \tsetprog{TotCount} verwendet.
+
+\exercise{Erste Schritte}
+%
+Um das Paket nutzen zu können, muss dieses mittels
+
+\tsetprog{\usepackage[en]{hsel-uebungen2015}}
+
+in das Dokument eingebunden werden. Der erste optionale Parameter definiert mit \tsetprog{{en,de}} die Sprache der Begrifflichkeiten im Dokument, wobei standardmäßig der Parameter \tsetprog{de} gesetzt wird. Als Basis dient vorzugsweise \addpoints{3}
+
+\tsetprog{\documentclass[a4paper,12pt]{article}}
+
+%\subexercise{}{4}
+Durch das Kommando \tsetprog{\exercise}wird eine neue Aufgabe angelegt. Als optionaler Parameter kann hier ein Titel zur Aufgabe übergeben werden. Beispiel:\addpoints{5}
+
+\tsetprog{\exercise{Erste Schritte}}
+
+
+\exercise{Textkopf}
+%
+Das Dokument kann mit einem Textbaustein versehen werden, der einen standardisierten Textkopf erstellt. Die Daten zum Textkopf mit Angabe zum Namen der Veranstaltung, Namen des oder der Dozenten, werden durch das Kommando \tsetprog{\setexheader}gesetzt und der Textkopf wird mittels \tsetprog{\printexheader}erzeugt.\\ Beispiel: 
+
+\begin{verbatim}
+\setexheader{Praktikum Mikrocomputersysteme SS2011}
+			{Prof. Dr. C.~Koch}{carsten.koch@hs-emden-leer.de}
+			{HS Emden/Leer, Fachbereich Technik \hfill Elektrotechnik und Informatik}
+			{\today}	
+\printexheader
+\end{verbatim}
+			
+Zur Dokumentation von erfolgreich bearbeiteten Praktikumsaufgaben (Testat) besteht mittels \tsetprog{\printreceipt}die Möglichkeit, einen weiteren Textblock zu generieren, der Angaben zum Studierenden und dem Prüfungsdatum enthält. Ein Beispiel hierzu ist auf der ersten Seite dieses Dokuments dargestellt. \addpoints{5}
+
+\exercise{Aufsummieren der Punkte}
+Für jede Aufgabe kann mit Hilfe des Befehls \tsetprog{\addpoints}die Anzahl der zu erreichenden Teilpunkte festgelegt werden. Diese werden am rechten Rand der Zeile dargestellt. \addpoints{4}
+
+Nach dem Aufruf von \tsetprog{\exercise}werden alle mittels \tsetprog{\addpoints}definierten Punkte zu dieser Aufgabe aufsummiert. \addpoints{10}
+
+Alternativ besteht die Möglichkeit mehrere Aufgaben in dem Stil einer Auflistung zu erstellen. Dazu folgendes Beispiel:
+
+%\exercise{Auflistung von Aufgaben}
+\begin{enumerate}
+	\exitem{Ich bin eine Aufgabe}{2}
+	\exitem{Ich bin auch eine Aufgabe}{3}
+	\exitem{Und ich bin eine weitere Aufgabe}{3}
+\end{enumerate}
+Der Quelltext dazu:
+\begin{verbatim}
+\begin{enumerate}
+\exitem{Ich bin eine Aufgabe}{2}
+\exitem{Ich bin auch eine Aufgabe}{3}
+\exitem{Und ich bin eine weitere Aufgabe}{3}
+\end{enumerate}
+\end{verbatim}
+Dabei ruft \tsetprog{\exitem}bereits die Funktion \tsetprog{\addpoints}auf, sodass die Punkte jeder Aufgabe automatisch zugeordnet werden.
+
+\subexercise[Unteraufgaben]
+Zusätzlich besteht die Möglichkeit Unteraufgaben zu definieren, um eine zusätzliche Hierarchie-Ebene einzufügen. Dazu kann der Befehl \tsetprog{\subexercise[<name>]} verwendet werden. Dieser besitzt lediglich einen optionalen Parameter, weshalb hier eckige Klammern verwendet werden. Bei diesem handelt es sich um den Namen der Aufgabe. So wurde diese Unteraufgabe mit folgendem Quellcode generiert.
+\begin{verbatim}
+\subexercise[Unteraufgabe]
+\end{verbatim}
+Die in Unteraufgaben definierten Punkte werden derzeit nicht separat gezählt, sodass nachfolgende Aufrufe von \tsetprog{\addpoints}nach wie vor der mit \tsetprog{\exercise}zuletzt definierten Aufgabe zugeordnet werden - in diesem Beispiel \exref{3} und nicht \subexref{3}{1}.\addpoints{1}
+
+\subexercise
+Ein weiteres Feature ist die Berechnung der Summe aller vergebenen Punkte. In diesem Dokument wurden beispielsweise insgesamt \printexpoints Punkte vergeben. Dieser Wert kann mit der Funktion \tsetprog{\printexpoints}ausgegeben werden.\addpoints{5}
+
+Hierzu muss das Dokument jedoch drei Mal übersetzt werden. Im ersten Durchlauf werden die Punkte zu jeder Aufgabe aufsummiert und in die \tsetfile{.aux}-Datei geschrieben. Bei dem zweiten Durchlauf werden diese Werte ausgelesen und zu jeder Aufgabe aufsummiert. Im letzten Durchlauf werden die Punkte aller Aufgaben aufsummiert und sind im Dokument verfügbar. 
+
+\exercise{Verweise auf Aufgaben}
+Möchte man innerhalb des Textes auf eine Aufgabe oder Unteraufgabe verweisen, können dazu die beiden Befehle 
+\begin{enumerate}
+	\exitem{\tsetprog{\exref{<number of exercise>}}}{3}
+	\exitem{\tsetprog{\subexref{<number of exercise>}{<number of subexercise>}}}{2}
+\end{enumerate}
+verwendet werden. Damit ist es bspw. möglich ein Verweis auf \subexref{3}{2} mittels
+\begin{verbatim}
+\subexref{3}{2}
+\end{verbatim}
+zu erstellen. Für diese Funktionalität werden automatisch Labels beim Aufruf von \tsetprog{\exercise}und \tsetprog{\subexercise}mit der jeweiligen Aufgabennummer angelegt.
+
+\exercise{Formatierung}
+Zur einheitlichen Formatierung (\emph{Typesetting}) häufig verwendeter Textelemente wurden eigene Befehle definiert:
+
+\begin{tabular}{r l}
+\tsetprog{\tsetfile} & Dateinamen und Pfade\\
+\tsetprog{\tsetprog} & Elemente einer Programmiersprache, also Variablen, Funktionen, etc. \\
+\tsetprog{\tsetsw} & Elemente einer Software, also Menüeinträge, Parameter, etc.\\
+\tsetprog{\tsettitle} & Titel von Dokumenten \\
+\end{tabular}
+
+In der jeweils übergebenen Zeichenkette dürfen sich Leerzeichen und Sonderzeichen befinden. Da zur Umsetzung der {\LaTeX}-Befehl \tsetprog{\detokenize}verwendet wurde, wird jedoch jedem Backslash ein Leerzeichen hinzugefügt. Das folgende Beispiel
+
+\begin{verbatim}
+''Lesen Sie die ersten beiden Kapitel im Tutorial
+\tsettitle{Introduction to the Qsys System Integration
+Tool} von Altera. Öffnen Sie anschließend in Qsys 
+die Datei \tsetfile{nios_basic.qsys} im Verzeichnis 
+\tsetfile{../sopc intro/qsys} und erweitern Sie das 
+System mit einem zusätzlichen On-Chip-Speicher \dots''
+\end{verbatim}
+
+wird wie folgt dargestellt:
+
+''Lesen Sie die ersten beiden Kapitel im Tutorial \tsettitle{Introduction to the
+Qsys System Integration Tool} von Altera. Öffnen Sie anschließend in Qsys die Datei \tsetfile{nios_basic.qsys} im Verzeichnis 
+\tsetfile{../sopc intro/qsys} und erweitern Sie das System mit einem zusätzlichen On-Chip-Speicher \dots''
+
+% mark end of document with label and close it
+\label{sec:LastPage}
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass[mathserif,9pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}		% German style for date, sections ...
+
+%\usepackage{helvet}
+
+% Teilweise nützeliche Pakete:
+%\usepackage[USenglish,english,ngerman]{babel}
+%\usepackage{fancyhdr}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+%\usepackage{array}
+%\usepackage{tikz}
+%\usepackage{fancyvrb}
+%\usepackage{ctable}
+%\usepackage{longtable}
+%\usepackage{hhline}
+%\usepackage{varioref}
+%\usepackage{wrapfig}
+%\usepackage{subfigure}
+%\usepackage{eurosym}
+%\usepackage{hvfloat}
+%\usepackage{tabularx}
+%\usepackage{bibgerm}
+%\usepackage{listings}
+%\usepackage{color}
+
+\usepackage{fbtechnik-slides-100917}	% custom beamer style file: HS Emden/Leer
+
+\title[Kurztitel]{Langer Titel}
+\subtitle{Präsentation ...}
+\author{Max Mustermann}
+\institute{FB Technik | Abteilung Elektrotechnik und Informatik}
+\date{\today}
+
+%\date[31. August 2010]{\vspace{-30pt}\\31. August 2010\\[10pt]
+%{\scriptsize
+%\begin{tabular}{ll}
+%	Erstprüfer:	& Prof. Dr. ... \\
+%	Zweitprüfer:& Prof. Dr. ... \\
+%\end{tabular}\\[-0cm]}}
+
+\begin{document}
+	\titleframe		% custom title frame with background logo
+	
+	\begin{frame}{Inhalt}
+		%\begin{eblock}
+			%\vspace{-1em}
+			\tableofcontents%[hideallsubsections]
+		%\end{eblock}
+	\end{frame}
+
+	\section{Einleitung}
+		\begin{frame}{Das Thema}
+			%\framesubtitle{NANANA}
+			\begin{block}{Das Thema}
+				Das Thema lautet ,,...''\\
+				Hier könnte Ihre Werbung stehen!
+			\end{block}
+		\end{frame}
+	
+		\subsection{Alternativen}
+			\begin{frame}{Alternativen}
+				\begin{block}{Erste}
+					\begin{itemize}
+						\item Erstes Argument
+							\begin{itemize}
+							\item uno
+							\item due
+							\end{itemize}
+						\item Zweites Argument
+					\end{itemize}
+				\end{block}
+				
+				\begin{block}{Zweite}
+					\begin{itemize}
+						\item ...
+						\item ...
+					\end{itemize}
+				\end{block}
+				
+			\end{frame}
+
+		\subsection{Alternative A}
+			\begin{frame}{Die Erste}
+				\begin{block}{Die Erste}
+					\begin{itemize}
+						\item ...
+						\item ...
+					\end{itemize}
+				\end{block}
+			\end{frame}
+
+		\subsection{Alternative B}
+			\begin{frame}{Die Zweite}
+				\begin{block}{Die Zweite}
+					\begin{itemize}
+						\item ...
+						\item ...
+					\end{itemize}
+				\end{block}
+			\end{frame}
+
+	\section{These}
+		\begin{frame}{Die These}
+			\begin{block}{Die These}
+				Die These lautet ,,...''
+			\end{block}
+		\end{frame}
+			
+	\section{Analyse}
+		\begin{frame}{Die Analyse}
+			\begin{eblock}
+				Einfacher Textinhalt
+			\end{eblock}
+			
+			\begin{eblock}
+				\vspace{-4pt} % Ohne Text läßt ein Block zu viel Platz
+				\begin{columns}
+					\column{0.01\textwidth}
+						% Linker Abstand
+					\column{0.45\textwidth}
+						\begin{wblock}
+							Bild 1
+						\end{wblock}
+					\column{0.45\textwidth}
+						\begin{wblock}
+							Bild 2
+						\end{wblock}
+					\column{0.01\textwidth}
+						% Rechter Abstand
+				\end{columns}
+			\end{eblock}
+		\end{frame}
+		
+\frame{ \frametitle{Organisation}
+
+Das Modul ''Automaten'' besteht aus der Vorlesung (2~SWS) sowie dem Praktikum (2~SWS).
+
+  \begin{itemize}
+  \item Die Vorlesung bereitet das Praktikum vor. Sobald ausreichend Vorwissen aufgebaut ist, werden die Übungsblätter für das Praktikum via EMI-Board\footnote{ \hyperlink{http://board.et-inf.fho-emden.de/}{http://board.et-inf.fho-emden.de/} } veröffentlicht.
+  \item Es werden 8 Übungsblätter bereitgestellt, die jeweils ca. 1 Wochen nach Veröffentlichung im Praktikum diskutiert werden. Die Bekanntgabe der Termine für das jeweilige Praktikum erfolgt ebenfalls via EMI-Board.
+  \item Die bearbeiteten Übungen sind am Tag {\bf vor} dem Praktikum abzugeben\footnote{Lösung in Papierform in Briefkasten vor S110 einwerfen}! %Um zur Klausur zugelassen zu werden ist die Abgabe aller bearbeiteten Übungen obligatorisch.
+\item Die Übungen dürfen in Zweiergruppen bearbeitet werden. Die Anmeldung hierzu erfolgt ebenfalls via EMI-Board.
+  \end{itemize}
+		
+} % EOFrame		
+				
+	\section{Fazit}
+	
+	\section*{}
+	\begin{frame}{Ende}
+		\begin{block}{Ende}
+			Vielen Dank für Ihre Aufmerksamkeit	...
+		\end{block}
+	\end{frame}
+	
+	%\begin{frame}{Literatur}
+	%	\footnotesize
+	%	\nocite*
+	%	\bibliography{literatur}
+	%	\bibliographystyle{geralpha}
+	%\end{frame}
+
+\end{document}

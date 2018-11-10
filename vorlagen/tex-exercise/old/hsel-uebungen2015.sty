@@ -1,0 +1,253 @@
+% *******************************************************************
+%   Latex package for creating exercise sheets
+%   C.Koch | HS Emden/Leer | 02.01.2012
+% *******************************************************************
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hsel-uebungen2015}
+% include additional packages
+\RequirePackage{fancyhdr}       % custom footer and header
+\RequirePackage{url}			% improved formating of URL
+\RequirePackage{parskip}		% nicer spacing between paragraphs (toe)
+\RequirePackage{totcount}       % for counting the number of points
+\RequirePackage{ifthen}
+\RequirePackage{hyperref}
+
+\hypersetup{colorlinks, 
+	linkcolor=[rgb]{0, 0.415,0.6745}}
+
+% create a new counter for the total number of points
+\newtotcounter{totalexpoints}
+% create a counter for numerating the exercises
+\newcounter{excount}
+% create a counter for numerating the subexercises
+\newcounter{subexcount}
+
+% set page margins
+\setlength{\topmargin}{-0.5cm}
+\setlength{\textheight}{245mm}
+\setlength{\textwidth}{150mm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+% \setlength{\parindent}{0cm} % no need with package parskip
+
+
+
+% package options: english / german version
+
+% set the initial values of the language specific variables - will be redefined with respect to the given option
+\newcommand{\ExName}{Aufgabe}
+\newcommand{\ReceiptTitle}{Testat}	
+\newcommand{\ReceiptLineFirstLeft}{Name, Vorname:}
+\newcommand{\ReceiptLineFirstRight}{Datum:}
+\newcommand{\ReceiptLineSecondLeft}{Matr.Nr.:}
+\newcommand{\ReceiptLineSecondRight}{Unterschrift:}
+
+\DeclareOption{de}{%
+	\rfoot{ \sffamily \DocDate ~ Seite \thepage/\pageref{sec:LastPage}} 
+	% Just use the already defined values
+%	\renewcommand{\ExName}{Aufgabe}
+%	\renewcommand{\ReceiptTitle}{Testat}	
+%	\renewcommand{\ReceiptLineFirstLeft}{Name, Vorname:}
+%	\renewcommand{\ReceiptLineFirstRight}{Datum:}
+%	\renewcommand{\ReceiptLineSecondLeft}{Matr.Nr.:}
+%	\renewcommand{\ReceiptLineSecondRight}{Unterschrift:}
+}
+
+\DeclareOption{en}{%
+	\renewcommand{\ExName}{Exercise}
+	\rfoot{ \sffamily \DocDate ~ Page \thepage/\pageref{sec:LastPage}} 
+	% set receipt text	
+	\renewcommand{\ReceiptTitle}{Testat}	
+	\renewcommand{\ReceiptLineFirstLeft}{Name, forename:}
+	\renewcommand{\ReceiptLineFirstRight}{Date:}
+	\renewcommand{\ReceiptLineSecondLeft}{Matr.Nr.:}
+	\renewcommand{\ReceiptLineSecondRight}{Signature:}
+}
+
+
+\ProcessOptions
+% commands for printing a dynamic footer and header
+\newcommand{\DocTitle}{Exercise example}
+\newcommand{\DocAuthor}{Anonymous}
+\newcommand{\DocInstitute}{University}
+\newcommand{\DocEmail}{anonymous@university.edu}
+\newcommand{\DocDate}{\today}
+
+\newcommand{\ExerciseName}{ }
+\newcommand{\ExercisePoints}{ }
+\newcommand{\SubexerciseName}{ }
+
+% scheme of the counter names
+\newcommand{\cntname}[1]{%
+	cnt#1%
+}
+
+% creates a new counter with identifier #1. This function creates counters on the fly
+\newcommand{\createExerciseCounter}[1]
+{%
+	\begingroup%
+	\edef\tempcounter@@name{\cntname{#1}}%
+	\expandafter\newtotcounter\expandafter{\tempcounter@@name}%
+	\expandafter\setcounter\expandafter{\tempcounter@@name}{0}%
+	\endgroup
+}
+
+% adds the points #2 to the previously created counter #1
+\newcommand{\addExercisePoints}[2]
+{
+	\begingroup
+	\edef\tempcounter@@name{\cntname{#1}}%
+	\expandafter\addtocounter\expandafter{\tempcounter@@name}{#2}
+	\endgroup
+}
+
+% prints the points of the given exercise
+\newcommand{\printExercisePoints}[1]
+{
+% ... but only, if there are points to print - else omit it
+\ifnum\totvalue{\cntname{#1}}>0
+	\total{\cntname{#1}}%
+\fi
+}
+
+% returns the points of the specified exercise (as number for further processings)
+\newcommand{\getExercisePoints}[1]
+{
+	\totvalue{\cntname{#1}}
+}
+
+% creates a new exercise with the given Name.
+% usage: \exercise{<name>}
+% Use this function for a new exercise. Following calls of addpoints() are 
+% linked to this exercise.
+\newcommand{\exercise}[1]{
+	
+	
+	\renewcommand{\ExerciseName}{#1} 
+	
+	% increment the counter
+	\refstepcounter{excount}
+	
+	% reset the counter for the subsections
+	\setcounter{subexcount}{0}
+	
+	% create an exercise counter for this new exercise
+	\createExerciseCounter{\theexcount}
+	
+	% get the points of the current exercise and save it as \ExercisePoints
+	\renewcommand{\ExercisePoints}{\getExercisePoints{\theexcount}}
+	
+	% add the points of the current exercise to the total counter
+	\addtocounter{totalexpoints}{\ExercisePoints}
+
+	% now print the header of the exercise with the exercise points
+	\par\bigskip   
+	{\normalfont\Large {\bf \ExName~\arabic{excount} \hspace{0.5cm} \normalsize{\ExerciseName \hfill \printExercisePoints{\theexcount}}}\label{ex:\theexcount}}
+	\par\smallskip   
+}
+
+% Create a link to an exercise 
+% usage: \exref{<number of exercise>}
+% This function will print \ExName <number of exercise>
+\newcommand{\exref}[1]{%
+	\hyperref[ex:#1]{\ExName~#1}%
+}
+
+% Creates a new subexercise with an optional Name.
+% usage: \subexercise[name] or \subexercise 
+% Use this function to create a new hierarchical level. 
+% Note: You need to call \exercise at least once before.
+% Note: Using subexercises has no inpact on the sum calculation
+\newcommand{\subexercise}[1][\empty]{
+	\refstepcounter{subexcount}
+	
+	\ifthenelse{\equal{#1}{\empty}}
+	{\renewcommand{\SubexerciseName}{}}
+	{\renewcommand{\SubexerciseName}{#1}}
+	
+	\par\medskip   
+	{\normalfont{\normalsize } {\bf \ExName~\arabic{excount}.\arabic{subexcount}  \hspace{0.5cm}  \normalsize{\SubexerciseName}  \hfill}}\label{subex:\theexcount_\thesubexcount}
+	\par\smallskip   
+}
+
+% Create a link to an subexercise 
+% usage: \exref{<number of exercise>}{<number of subexercise>}
+% This function will print \ExName <number of exercise>.<number of subsexercise>
+\newcommand{\subexref}[2]{%
+	\hyperref[subex:#1_#2]{\ExName~#1.#2}%
+}
+
+% enumerated items may contain sub-exercises with related points: add them to total points
+\newcommand{\exitem}[2]{
+	\expandafter\item #1
+	\addpoints{#2}
+}
+
+% Adds the given number of points to the current exercise (created by a previous call of \exercise{})
+% usage: \addpoints{5}
+% Calling this function means that at the position of the function call a little number will be printed
+% indicating the points for this exercise. Thats why you should call this function at the end of a 
+% sentence or paragraph.
+\newcommand{\addpoints}[1]{
+	\addExercisePoints{\theexcount}{#1}
+	\hfill{\tiny #1}
+}
+
+\newcommand{\setexheader}[5]{
+    \renewcommand{\DocTitle}{#1}
+    \renewcommand{\DocAuthor}{#2}
+    \renewcommand{\DocEmail}{#3}
+    \renewcommand{\DocInstitute}{#4}
+    \renewcommand{\DocDate}{#5}
+	}
+
+\newcommand{\printexheader}{
+    \sffamily
+    \rule{\textwidth}{0.8pt}\\
+    {\DocInstitute}\\
+    {\DocAuthor} \hfill E-Mail: {\tt \DocEmail}\\
+    \textbf{\DocTitle} \hfill \DocDate\\
+    \rule{\textwidth}{0.8pt}\\
+    }
+
+% print the document major title: large and centered
+\newcommand{\printextitle}[1]{
+    \begin{center}
+    \textbf{{\Large \rmfamily #1}}
+    \vspace{0.4cm}
+    \end{center} }
+
+% print the total number of exercise points
+\newcommand{\printexpoints}{\total{totalexpoints} }
+
+% enable custom header and footer
+\pagestyle{fancy}
+
+\fancyhead{}
+% draw horizontal line(s)
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{0.0pt}
+\addtolength{\footskip}{0.5cm}
+
+% footer: define left / center / right field
+\lfoot{ \sffamily \DocTitle}%
+\cfoot{}
+
+
+% print receipt for passed test/practice/oral exam
+\newcommand{\printexreceipt}{
+\samepage{
+    \sffamily
+    \vspace{1.0cm}
+    \rule{\textwidth}{0.8pt}\\
+ 	{\bf \ReceiptTitle}\\ 
+        
+    \begin{tabular}{p{0.5\textwidth} p{0.3\textwidth}}
+	\ReceiptLineFirstLeft{} & \ReceiptLineFirstRight{}\\
+    \ReceiptLineSecondLeft{} & \ReceiptLineSecondRight{}\\
+	\end{tabular}   
+    
+    \rule{\textwidth}{0.8pt}\\}}
+
+\ProcessOptions

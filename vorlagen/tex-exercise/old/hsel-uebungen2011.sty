@@ -1,0 +1,129 @@
+% *******************************************************************
+%   Latex package for creating exercise sheets
+%   C.Koch | HS Emden/Leer | 02.01.2012
+% *******************************************************************
+
+\NeedsTeXFormat{LaTeX2e}
+
+% include additional packages
+\RequirePackage{fancyhdr}       % custom footer and header
+\RequirePackage{url}			% improved formating of URL
+\RequirePackage{parskip}		% nicer spacing between paragraphs (toe)
+
+% new exercise counter: exercise and subexercise
+\newcounter{excount}
+\newcounter{subexcount}
+
+% set page margins
+\setlength{\topmargin}{-0.5cm}
+\setlength{\textheight}{245mm}
+\setlength{\textwidth}{150mm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+% \setlength{\parindent}{0cm} % no need with package parskip
+
+% package options: english / german version
+\DeclareOption{de}{%
+	\newcommand{\ExName}{Aufgabe}
+	\rfoot{ \sffamily \DocDate ~ Seite \thepage/\pageref{sec:LastPage}} 
+	% set receipt text	
+	\newcommand{\ReceiptTitle}{Testat}	
+	\newcommand{\ReceiptLineFirstLeft}{Name, Vorname:}
+	\newcommand{\ReceiptLineFirstRight}{Datum:}
+	\newcommand{\ReceiptLineSecondLeft}{Matr.Nr.:}
+	\newcommand{\ReceiptLineSecondRight}{Unterschrift:}
+}
+
+\DeclareOption{en}{%
+	\newcommand{\ExName}{Exercise}
+	\rfoot{ \sffamily \DocDate ~ Page \thepage/\pageref{sec:LastPage}} 
+	% set receipt text	
+	\newcommand{\ReceiptTitle}{Testat}	
+	\newcommand{\ReceiptLineFirstLeft}{Name, forename:}
+	\newcommand{\ReceiptLineFirstRight}{Date:}
+	\newcommand{\ReceiptLineSecondLeft}{Matr.Nr.:}
+	\newcommand{\ReceiptLineSecondRight}{Signature:}
+}
+
+\ProcessOptions
+
+% commands for printing a dynamic footer and header
+\newcommand{\DocTitle}{Exercise example}
+\newcommand{\DocAuthor}{Anonymous}
+\newcommand{\DocInstitute}{University}
+\newcommand{\DocEmail}{anonymous@university.edu}
+\newcommand{\DocDate}{\today}
+
+\newcommand{\ExerciseName}{ }
+\newcommand{\SubExerciseName}{ }
+\newcommand{\ExercisePoints}{ }
+
+\newcommand{\exercise}[2]{
+	\renewcommand{\ExerciseName}{#1}
+	\renewcommand{\ExercisePoints}{#2}
+	\refstepcounter{excount}
+	\par\medskip   
+	{\normalfont\Large {\bf \ExName~\arabic{excount} \hspace{0.5cm} \normalsize{\ExerciseName \hfill \ExercisePoints}}}
+	\par\medskip   
+}
+
+\newcommand{\subexercise}[2]{
+	\renewcommand{\SubExerciseName}{#1}
+	\renewcommand{\ExercisePoints}{#2}
+	{\bf \ExName~\stepcounter{subexcount}{\arabic{excount}.\arabic{subexcount}} \hspace{0.5cm} \SubExerciseName \hfill \ExercisePoints}\\
+	}
+
+\newcommand{\setexheader}[5]{
+    \renewcommand{\DocTitle}{#1}
+    \renewcommand{\DocAuthor}{#2}
+    \renewcommand{\DocEmail}{#3}
+    \renewcommand{\DocInstitute}{#4}
+    \renewcommand{\DocDate}{#5}
+	}
+
+\newcommand{\printexheader}{
+    \sffamily
+    \rule{\textwidth}{0.8pt}\\
+    {\DocInstitute}\\
+    {\DocAuthor} \hfill E-Mail: {\tt \DocEmail}\\
+    \textbf{\DocTitle} \hfill \DocDate\\
+    \rule{\textwidth}{0.8pt}\\
+    }
+
+% print the document major title: large and centered
+\newcommand{\printextitle}[1]{
+    \begin{center}
+    \textbf{{\Large \rmfamily #1}}
+    \vspace{0.4cm}
+    \end{center} }
+
+% enable custom header and footer
+\pagestyle{fancy}
+
+\fancyhead{}
+% draw horizontal line(s)
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{0.0pt}
+\addtolength{\footskip}{0.5cm}
+
+% footer: define left / center / right field
+\lfoot{ \sffamily \DocTitle}%
+\cfoot{}
+
+
+% print receipt for passed test/practice/oral exam
+\newcommand{\printexreceipt}{
+\samepage{
+    \sffamily
+    \vspace{1.0cm}
+    \rule{\textwidth}{0.8pt}\\
+ 	{\bf \ReceiptTitle}\\ 
+        
+    \begin{tabular}{p{0.5\textwidth} p{0.3\textwidth}}
+	\ReceiptLineFirstLeft & \ReceiptLineFirstRight\\
+    \ReceiptLineSecondLeft & \ReceiptLineSecondRight\\
+	\end{tabular}   
+    
+    \rule{\textwidth}{0.8pt}\\}}
+
+\ProcessOptions

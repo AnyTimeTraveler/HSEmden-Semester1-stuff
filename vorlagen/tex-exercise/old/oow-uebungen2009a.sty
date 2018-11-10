@@ -1,0 +1,74 @@
+% *******************************************************************
+%   Latex style file for creating exercise sheets
+%   C.Koch | FH Emden/Leer | 08.10.2009
+% *******************************************************************
+
+% include additional packages
+\usepackage[T1]{fontenc}    % german language support
+\usepackage[ngerman]{babel} % german language support
+\usepackage[latin1]{inputenc}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{graphicx}       % import graphic files
+
+\usepackage{fancyhdr}       % custom footer and header
+\usepackage{url}			% improved formating of URL
+\usepackage{parskip}		% nicer spacing between paragraphs (toe)
+
+% redundant: include vaucanson-g in tex-files, if needed -- not in sty
+% \usepackage{vaucanson-g}    % draw automata figures
+
+\usepackage{amsmath}		% fancy math symbols and fonts
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+
+% set page margins
+\setlength{\topmargin}{-0.5cm}
+\setlength{\textheight}{245mm}
+\setlength{\textwidth}{150mm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+% \setlength{\parindent}{0cm} % no need with package parskip
+
+% define new commands to switch to exercise mode
+\newcommand{\StartExercise}{
+    \renewcommand{\labelenumi}{\alph{enumi}.)}
+    \renewcommand{\thesection}{Aufgabe \arabic{section}} }
+
+% commands for printing a dynamic footer and header
+\newcommand{\DocTitle}{"Ubungen}
+\newcommand{\DocDate}{\today}
+\newcommand{\DocAuthor}{Anonymous}
+
+\newcommand{\PrintHeader}[3]{
+    \renewcommand{\DocTitle}{#1}
+    \renewcommand{\DocAuthor}{#2}
+    \renewcommand{\DocDate}{#3}
+    \sffamily
+    \rule{\textwidth}{0.8pt}\\
+    {FH Emden/Leer, Fachbereich Technik \hfill Elektrotechnik und Informatik}\\
+    %{Prof. Dr. Carsten Koch}\hfill
+    {\DocAuthor} \hfill E-Mail: {\tt koch@technik-emden.de}\\
+    \textbf{\DocTitle} \hfill \DocDate\\
+    \rule{\textwidth}{0.8pt}\\}
+
+% print the document major title: large and centered
+\newcommand{\PrintTitle}[1]{
+    \begin{center}
+    \textbf{{\Large \rmfamily #1}}
+    \vspace{0.4cm}
+    \end{center} }
+
+% enable custom header and footer
+\pagestyle{fancy}
+
+\fancyhead{}
+% draw horizontal line(s)
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{0.0pt}
+\addtolength{\footskip}{0.5cm}
+
+% footer: define left / center / right field
+\lfoot{ \sffamily \DocTitle}%
+\cfoot{}
+\rfoot{ \sffamily \DocDate ~ Seite \thepage/\pageref{sec:LastPage}}
