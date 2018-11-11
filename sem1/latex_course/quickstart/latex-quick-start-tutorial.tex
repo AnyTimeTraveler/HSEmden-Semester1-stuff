@@ -1,0 +1,235 @@
+% Preamble
+% ---
+\documentclass[10pt]{article}
+
+% Packages
+% ---
+\usepackage{amsmath} % Advanced math typesetting
+\usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
+\usepackage[ngerman]{babel} % Change hyphenation rules
+\usepackage{hyperref} % Add a link to your document
+\usepackage{graphicx} % Add pictures to your document
+\usepackage{listings} % Source code formatting and highlighting
+
+\usepackage[backend=bibtex,style=numeric]{biblatex} % Use biblatex package
+\bibliography{quick} % The name of the .bib file (name without .bib)
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5ex}
+
+% Main document
+% ---
+\begin{document}
+% Set up the maketitle command
+\author{Claudio Vellage\thanks{Übersetzt von Tilman Leune}} 
+\title{\LaTeX{}-Schnellstart}
+\date{\today{}} % You can remove \today{} and type a date manually
+
+\maketitle{} % Generates title
+
+\tableofcontents{} % Generates table of contents from sections
+
+\section{Wie man \LaTeX{} verwendet}
+Dies ist eine kurze Einführung in die wichtigsten Funktionen von \LaTeX{}. Für mehr
+Funktionen, sehen Sie sich die anderen Lektionen unter \url{http://www.latex-tutorial.com} und die
+Artikel auf \url{http://blog.latex-tutorial.com} an. 
+
+\subsection{Dokumentenstruktur}
+Die Dokumente in \LaTeX{} sind etwas anders strukturiert als in Word. Das Dokument besteht aus zwei Teilen, der Präambel und dem Hauptdokument. 
+
+\subsubsection{Präambel}
+Der Zweck der Präambel ist es, \LaTeX{} mitzuteilen, welche Art von Dokument Sie erstellen möchten
+und welche Funktionspakete (packages) Sie benötigen werden. Ein Paket ist ein Satz von Zusatzfunktionen wie z.B. \texttt{amsmath} für zusätzliche mathematische Formatierungen. Für dieses Dokument sieht die Präambel wie folgt aus:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Präambel dieses Dokumentes, breaklines=true,frame=single]
+% Preamble
+% ---
+\documentclass{article}
+
+% Packages
+% ---
+\usepackage{amsmath} % Advanced math typesetting
+\usepackage[utf8]{inputenc} % Unicode support (Umlaute etc.)
+\usepackage[ngerman]{babel} % Deutsche Silbentrennungsregeln
+\usepackage{hyperref} % Add a link to your document
+\usepackage{graphicx} % Hinzufuegen von Bildern zum Dokument
+\usepackage{listings} % Quellcode-Listings 
+\end{lstlisting}
+
+Sie können die Klasse des Dokuments mit dem Kommando \texttt{documentclass} setzen und Pakete mit dem Kommando \texttt{usepackage} hinzufügen. Nur der Kommando \texttt{documentclass} ist obligatorisch, Sie können ein Dokument auch ohne Packages kompilieren, allerdings fehlen in diesem Fall einige Funktionen. Der Kommando \texttt {usepackage} darf im Hauptdokument nicht verwendet werden.
+
+\subsubsection{Hauptdokument}
+Das Hauptdokument ist von der \texttt{document}-Umgebung umschlossen:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Hauptteil eined \LaTeX{} -Dokumentes.,breaklines=true,frame=single,frame=single]
+\begin{document}
+% ...
+% ... Der Text kommt hierher
+% ...
+\end{document}
+\end{lstlisting}
+
+Innerhalb dieser \texttt{document}-Umgebung können wir den Inhalt unseres Dokuments hinzufügen. Aber das Hinzufügen des Textes allein reicht wahrscheinlich nicht aus, da wir ihn auch formatieren müssen.
+
+\section{Textformatierung in \LaTeX{}}
+Das Formatieren in \LaTeX{} wird durch die Verwendung von Befehlen und Umgebung durchgeführt. Die oberste Umgebung ist die \texttt{document}-Umgebung, wie in Listing \ref{lst:main} beschrieben. Es gibt also offensichtlich mehr Umgebungen, aber wie findet man sie? Nun, der einfachste Weg ist, ein \LaTeX{} Spickzettel herunterzuladen, der eine Liste der nützlichsten Befehle und Umgebungen enthält. Für die meisten Pakete gibt es auch ein Handbuch, das über Google zu finden ist.
+
+\subsection{Setzen mathematischer Formeln}
+Um Sie mit mathematischem Satz und Umgebungen vertraut zu machen, werde ich Ihnen zeigen, wie Sie einige einfache Gleichungen formatieren können:
+
+\begin{align}
+f(x) &= x^2\\
+f'(x) &= 2x\\
+F(x) &= \int f(x)dx\\
+F(x) &= \frac{1}{3}x^3
+\end{align}
+
+Die Gleichungen wurden mit folgendem Code erzeugt:
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Setzen von mathematischen Ausdrücken in  \LaTeX{}.,breaklines=true,frame=single]
+\begin{align}
+	f(x) &= x^2\\
+	f'(x) &= 2x\\
+	F(x) &= \int f(x)dx\\
+	F(x) &= \frac{1}{3}x^3
+\end{align}
+\end{lstlisting}
+
+Wie Sie sehen können, haben wir wieder eine \texttt{begin} und \texttt{end} Deklaration. Diesmal ist es die Anwendung der 	\texttt{align} Umgebung. Hiemit werden die Gleichungen auf das Kaufmanns-Und-Zeichen (\&) ausrichtet. Diese werden üblicherweise vor das Gleichheitszeichen gestellt. 
+
+Wenn Sie genau hinschauen, werden Sie sehen, dass \LaTeX{} auf magische Weise fortlaufende Zahlen zu allen Gleichungen hinzugefügt hat. LaTeX macht das auch für viele andere Elemente. Mehr dazu im nächsten Kapitel.
+
+\subsection{Dokumentlayout}
+Normalerweise besteht ein Dokument aus Strukturiertem Text und nicht nur aus ein paar Gleichungen. Wir werden in der Regel mindestens brauchen:
+
+\begin{itemize}
+	\item{Titel/Titelseite}
+	\item{Inhaltsverzeichnis}
+	\item{Überschriften und Abschnitte}
+	\item{Literaturverzeichnis}
+\end{itemize}
+\LaTeX{} stellt alle dafür benötigten Kommandos zur Verfügung:\\
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Hilfreiche Kommandos zum Strukturieren eines Dokumentes,label=lst:main,breaklines=true,frame=single]
+% Gliederungsebenen, automatisch durchnummeriert
+\section{Abschnittstitel} 
+\subsection{}
+\subsubsection{}
+% Ab der Gliedferungsebene "paragraph" wird keine Nummerierung mehr errzeugt
+\paragraph{} 
+\subparagraph{}
+
+ % Der Name des Autors
+\author{Claudio Vellage}
+% Der Titel des Dokumentes
+\title{A quick start to \LaTeX{}} 
+% Setzt datum, \today{} erzeugt aktuelles Datum
+\date{\today{}} 
+\maketitle{} % Erzeugt Titel
+\tableofcontents{} % Erzeugt INhaltsverzeichnis aus Sectoins und Subsections
+
+\\ % Zeilenumbruch
+\newpage{} % Seitenumbruch
+\end{lstlisting}
+Es gibt also Kommandos zur Gliederung in Abschnitte und Unterabschnitte. Die so festgelegte Gliederung wird beim Erzeugen des automatisch durchnummeriert. Mit dem Kommando \texttt{tableofcontents} wird aus der Gliederung das Inhaltsverzeichnis generiert. Sie müssen es nicht selbst machen, niemals. 
+
+Das Kommandos \texttt{maketitle}, erzeugt einen Titelblock wie am Anfang dieses Dokumentes. Damit das Funktioneren kann müssen vorher \texttt{autor}, \texttt{title} und \texttt{date} gesetzt werden. 
+
+Wenn Sie die Kommandos \texttt{maketitle} oder \texttt{tableofcontents} in Ihrem Dokument platzieren, werden der Titel-Block bzw. das Inhaltsverzeichnis genau an dieser Stelle hinzugefügt - Normalerweise am Anfang Ihres Dokumentes. Um den Titel auf einer eigenen Seite erscheinen zu lassen, verwenden Sie einfach den Kommando \texttt{clearpage}.
+
+\newpage
+\subsection{Ein Bild hinzufügen}
+
+Die meisten Dokumente benötigen auch irgendeine Art von Bild. So wie dieses hier:
+
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{img/HS_Header_web_start_shadow_980x330_c42c1ff477.jpg}
+\caption{Diese Abbildung zeigt ein Promo-Bild der Hochschule}
+\end{figure}
+
+Es hinzuzufügen ist ziemlich einfach:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Hinzufügen von Bildern,breaklines=true,frame=single]
+\begin{figure}
+\includegraphics[width=\textwidth]{picture.png}
+\caption{This figure shows the logo of my website.}
+\end{figure}
+\end{lstlisting}
+
+Sie müssen das Bild in eine \texttt{figure}-Umgebung einbetten und dann den Befehl \texttt{includegraphics} verwenden, um das Bild auszuwählen. Beachten Sie, dass sich die Bilddatei im gleichen Verzeichnis wie Ihre .tex-Datei befinden muss oder geben sie den Pfad so an:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Bild aus einem Unterordner hinzufügen ,breaklines=true,frame=single]
+% ...
+\includegraphics[width=\textwidth]{ORDNERNAME/picture.png}
+% ...
+\end{lstlisting}
+
+Um den Überblick nicht zu verlieren ist es ist eine gute Idee, sich direkt anzugewöhnen alle Bilder in Unterordnern zu organisieren.
+
+\subsection{References and Bibliography}\label{sec:ref}
+Sie können sogenannte Labels für alle automatisch nummerierten Elemente ihres Dokumentes (Abschnitte, Bilder, Tabellen, Listings, ...) angeben. Wenn Sie auf einen Abschnitt Ihres Dokuments verweisen möchten, verwenden Sie einfach den Befehl \texttt{label} und \texttt{ref} (Referenz). Das \texttt{label} gibt an, worauf Sie sich beziehen möchten, und der Verweis (\texttt{ref}) druckt die tatsächliche Nummer des Elements in Ihr Dokument. Dies funktioniert auch interaktiv in Ihrem PDF-Reader. Sie können diese Funktion im Abschnitt \ref{sec:ref} ausprobieren.
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Labels and references in \LaTeX{},breaklines=true,frame=single]
+\section{}\label{sec:YOURLABEL}
+% ...
+Ein Verweis auf Abschnitt \ref{sec:YOURLABEL} geschrieben
+\end{lstlisting}
+
+Ausarbeitungen enthalten typischerweise eine Menge von Literaturverweisen auf die großartigen Arbeiten anderer Leute. Zum zitieren benutzen wir das Paket \texttt{biblatex}
+Dazu müssen wir die Präambel um dieses ergänzen:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Präambelkommandos zur Verwendung von  biblatex.,breaklines=true,frame=single]
+\usepackage[backend=bibtex,style=verbose-trad2]{biblatex} % Use biblatex package
+\bibliography{DATEINAME} % der Name der .bib file (ohne .bib)
+\end{lstlisting}
+
+Alle Daten des Literaturverzeichnisses werden in der Bibilographie-Dateo (.bib) gespeichert. sie \textbf{dürfen nicht} innerhalb der .tex-Datei stehen, in der auf sie verwiesen wird.
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=Beispieldatei für Literaturliste,breaklines=true,frame=single]
+@ARTICLE=
+{
+	VELLAGE:1,
+	AUTHOR="Claudio Vellage",
+	TITLE="A quick start to \LaTeX{}",
+	YEAR="2013",
+	PUBLISHER="",
+}
+\end{lstlisting}
+
+Now i could add a self reference using the 	\texttt{cite} command:
+Jetzt könnte ich ein Selbstzitat mit dem \texttt{cite}-Kommando einfügen:
+
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=The cite command.,breaklines=true,frame=single]
+Dieses Feature funktioniert wie in \cite{VELLAGE:1} beschrieben.
+\end{lstlisting}
+Die Ausgabe sieht dann so aus:
+\begin{quote}
+Dieses Feature funktioniert wie in \cite{VELLAGE:1} beschrieben.
+\end{quote}
+
+
+Das Paket \texttt{biblatex} ist recht clever und kann uns eine automatisch erzeugte Bibliographie erzeugen. Üblicherweise wird diese ganz ans Ende des Dokumentes platziert. Man fügt dafür einfach nur das folgende Kommando am Ende des Dokumentes hinzu:
+
+\begin{lstlisting}[language={[LaTeX]TeX},caption=The cite command.,breaklines=true,frame=single]
+\printbibliography
+\end{lstlisting}
+
+Weitere Beispiele zu Zitaten finden sich auf meiner \href{http://www.latex-tutorial.com/lesson7/}{Website}.
+
+\section{Erweiterte Formatierungen}
+\subsection{Formatierung von Quellcode}
+
+In diesem Artikel habe ich das Paket \texttt{listings} benutzt, um die \LaTeX{} Code-Schnipsel zu formatieren. Sie können die Sprache für jeden \texttt{lstlistings}-Block einzeln angeben. Für diesen Artikel habe ich natürlich \LaTeX{} verwendet und eine Überschrift sowie einen aktivierten Zeilenumbruch hinzugefügt:
+
+
+\begin{lstlisting}[language={[LaTeX]TeX},label=lst:listings,caption=Verwendung des \texttt{listings}-Paketes,breaklines=true,frame=single,escapechar=^]
+^\textbackslash^begin{lstlisting}[language={[LaTeX]TeX},caption=,breaklines=true,frame=single]
+% Source code goes here
+^\textbackslash^end{lstlisting}
+\end{lstlisting}
+
+Die zu verwendende Programiersprache wird in der Form \texttt{[DIALEKT]LANGUAGE} angegeben.In Listing \ref{lst:listings}  wird \LaTeX{} als Dialekt von \TeX{} angegeben.
+Eine Liste aller von \texttt{listings} unterstützter Programmiersprachen findet sich im Paket-Handbuch\footnote{Selber googlen macht schlau}. Alternativ kann auch einfach der Name der Sprache angegeben werden. Wird diese nicht Unterstützt, so wird beim Übersetzen gibt es eine Warnung ausgegeben.
+
+\printbibliography
+\end{document}

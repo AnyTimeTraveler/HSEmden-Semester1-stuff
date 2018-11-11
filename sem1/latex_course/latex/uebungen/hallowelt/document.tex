@@ -1,0 +1,56 @@
+% My first latex document
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[ngerman]{babel}
+
+\title{Erstes LaTeX Dokument}
+\date{\today}
+\author{Simon Struck}
+\begin{document}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+	\section{One}
+	\subsection{One.One}
+	\paragraph{Paragraph}
+	Paragraph text
+	Paragraph text
+	Paragraph text
+	Paragraph text
+	\\
+	\\
+	Paragraph text
+	Paragraph text
+	\\
+	\subparagraph[Short sub paragraph]{Long subparagraph} Long subparagraph Long subparagraph Long subparagraph Long subparagraph Long subparagraph Long subparagraph Long subparagraph Long subparagraph 
+	\newpage
+	\section{Add images}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth,height=3cm]{img/logo.png}
+		\caption{Logo der Hochschule}
+		\label{fig:logo}
+	\end{figure}
+	Auf Abbildung \ref{fig:logo} sieht man das Logo der Hs Emden/Leer.
+	Niemals sollte \textbackslash label vor \textbackslash caption erstellt werden.
+	
+	
+	\subsection{Add image to custom places}
+	
+	\begin{figure}[b]
+		\centering
+		\includegraphics[width=0.5\linewidth]{img/test.jpg}
+		\caption{Testbild}
+		\label{fig:test}
+		\end{figure}
+	Die Abbildung \ref{fig:test} wurde mit dem Befehl [b] nach unten auf die Seite verschoben.
+	Mit [h] oder [h!] kann man das Bild auch zwingen im Text zu platzieren.
+	
+	Das Paket "placeins" kann Bilder noch besser in Fließtext einbauen.
+	\newpage
+	\appendix
+	\listoffigures
+\end{document}

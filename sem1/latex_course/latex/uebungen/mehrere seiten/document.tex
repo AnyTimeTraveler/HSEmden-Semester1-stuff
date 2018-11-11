@@ -1,0 +1,99 @@
+\documentclass[a4paper,twoside,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage[ngerman]{babel}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+
+% excercise 3
+\title{Meine Latex Uebungen}
+\author{Simon Struck}
+\date{\today}
+
+
+\begin{document}
+	% excercise 3
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{Einfuerung in Leerzeichen und -zeilen}
+	\input{inhalt/kapitel1.tex}
+	\newpage
+	
+	% excercise 4
+	\begin{abstract}
+		\input{inhalt/kapitel2.tex}
+	\end{abstract}
+	
+	\section{Übung 7}
+	\input{inhalt/uebung7.tex}
+	Hallo Welt
+	
+	
+	\section{Mine}
+	\input{inhalt/mine.tex}
+	
+	\section{Tables}
+	
+	\begin{tabular}{l|l|c|r|r}
+		Name & Vorname & Zentriert & Matrikelnummer & Rechtsbündig \\
+		Struck & Simon & Mitte & 701233 & Rechts \\
+	\end{tabular}
+	\begin{table}
+		\centering
+		\begin{tabular}{cccp{4cm}}
+			\toprule
+			\textbf{Name} & \textbf{Vorname} & \textbf{Matrikelnummer} & \textbf{Test}\\
+			\midrule
+			Struck & Simon & 701234 & Lorem ipsum carpe diem, Lorem ipsum carpe diem, Lorem ipsum carpe diem \\
+			Struck & Jonas & 701235 & ~ \\
+			Struck & Lukas & 701236 & ~ \\
+			Struck & Werner & 701237 & ~ \\
+			\bottomrule
+		\end{tabular}
+		\caption{Demotabelle}
+		\label{tab:demotabelle}
+	\end{table}
+	
+	\begin{table}
+		\begin{tabular}{l|l|l|l}
+			\multicolumn{2}{l|}{\textbf{Test A}} & \multicolumn{2}{l}{\textbf{Test B}} \\ \hline
+			\cellcolor{blue!25} a &
+			\cellcolor{blue!25} b &
+			\cellcolor{blue!25} c &
+			\cellcolor{blue!25} d \\ \hline
+			10     & 20 & 30     & 40 \\
+			50     & 60 & 70     & 80 \\
+		\end{tabular}
+	\end{table}
+	\newpage
+	
+	\section{Multiple Images}
+	\begin{figure}
+		\centering
+		\begin{subfigure}{0.4\linewidth}
+			\includegraphics[width=\linewidth]{img/img1.png}
+			\caption{Book 1}
+		\end{subfigure}	
+		\begin{subfigure}{0.4\linewidth}
+			\includegraphics[width=\linewidth]{img/img2.png}
+			\caption{Book 2}
+		\end{subfigure}
+		\caption{Latex books}
+	\end{figure}
+	
+	\newpage
+	\appendix
+	\listoffigures
+	\listoftables
+\end{document}

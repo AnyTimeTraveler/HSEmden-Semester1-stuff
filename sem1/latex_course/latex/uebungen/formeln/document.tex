@@ -1,0 +1,50 @@
+\documentclass[a4paper,twoside,10pt]{article}
+
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage[ngerman]{babel}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% title
+\title{Formeln in \LaTeX}
+\author{Simon Struck}
+\date{\today}
+\begin{document}
+	\maketitle
+	\newpage
+	
+	\section{Inline math}
+	Der Term $f(x) = x^2$ beschreibt eine Parabel.
+	
+	\section{Einzelne Formel}
+	\begin{equation}
+		\int_{-\pi}^{\frac{2}{3}\pi} \frac{x^3-\sqrt{\left|x\right|}}{\lambda \cdot \omega t_0}dx
+	\end{equation}
+	
+	% same as \begin{equation*}
+	\[
+	e^{x-1}
+	\]
+	
+	\begin{align}
+	\texttt{geg.:} R_{ges} &= 10 \Omega \\
+	R_{ges} &= R_1 + R_2
+	\end{align}
+	
+	\begin{align*}
+		3x - 2y + 4z &= 6 \\
+		 x - 5y + 2z &= 4 \\
+		 x      + 6z &= 0 \\
+	\end{align*}
+	
+	\begin{equation}
+		\begin{bmatrix}
+			4 & 3 & 2 \\
+			0 & 1 & 4 \\
+			1 & 3 & 6\\
+		\end{bmatrix} \times \vec{a}
+	\end{equation}
+\end{document}

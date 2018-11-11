@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{klitzke2016}
+L.~Klitzke and C.~Koch.
+\newblock Robust object detection for video surveillance using stereo vision
+  and gaussian mixture model.
+\newblock {\em Journal of {WSCG}}, 24(1):9--17, May 2016.
+
+\bibitem{patterson2005}
+D.~Patterson and J.L. Hennessy.
+\newblock {\em Rechnerorganisation und -entwurf}.
+\newblock Spektrum Akademischer Verlag, 3 edition, September 2005.
+
+\bibitem{spinneker2014}
+R.~Spinneker, C.~Koch, S-B. Park, and J.J. Yoon.
+\newblock Fast fog detection for camera based advanced driver assistance
+  systems.
+\newblock In {\em {IEEE} Conference on Intelligent Transportation
+  Systems({ITSC})}, Qingdao, China, October 2014.
+
+\end{thebibliography}

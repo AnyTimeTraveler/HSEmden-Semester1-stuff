@@ -1,0 +1,51 @@
+\documentclass[a4paper,twoside,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage[ngerman]{babel}
+\usepackage{a4wide}
+
+% excercise 3
+\title{Meine Latex Uebungen}
+\author{Simon Struck}
+\date{\today}
+
+
+\begin{document}
+	% excercise 3
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{Einfuerung in Leerzeichen und -zeilen}
+	Leerzeilen und Zeilenumbrüche in der Eingabe erzeugen nicht immer unbedingt Leerzeichen
+	und Zeilenumbrüche im Ausgabedokument, wie man zunächst vermuten möchte. Eine Folge von mehreren Leerzeichen wird als ein Leerzeichen angesehen. D.h., zwischen Wörtern können beliebig viele Leerzeichen stehen und trotzdem wird der Zwischenraum nicht größer. Auch ein
+	einzelner Zeilenumbruch ist nur ein Leerzeichen.
+	
+	
+	Mehrere Zeilenumbrüche in Folge leiten jedoch einen neuen Absatz ein. Der Abstand zwischen
+	Absätzen ist aber immer gleich, egal wie viele Zeilenumbrüche ihr Eingabedokument an dieser
+	Stelle hat.
+	
+	
+	Mit diesem Mechanismus können Sie folglich Ihren Text im Eingabefile nach Belieben um-
+	brechen. Doppelte Leerzeichen können sich ebenfalls nicht einschleichen. Probieren Sie das
+	Hinzufügen zusätzlicher Leerzeichen und Zeilenumbrüche einfach an diesem Beispieltext aus.
+	\newpage
+	
+	% excercise 4
+	\begin{abstract}
+		LaTeX ist ein Textsatzsystem, mit dem sich qualitativ hochwertige Druckwerke er-
+		zeugen lassen und welches sich daher in der Wissenschaft (insbesondere Mathematik
+		und Informatik) großer Beliebtheit erfreut. Das Einsatzspektrum reicht von Briefen und
+		Seminararbeiten über Abschlussarbeiten und Dissertationen bis hin zu mehrbändigen
+		Büchern. Allerdings unterscheidet sich die Bedienung von L A TEX im Vergleich zu Desktop-
+		Textbearbeitungen.
+	\end{abstract}
+	
+	
+	Hallo Welt
+\end{document}
