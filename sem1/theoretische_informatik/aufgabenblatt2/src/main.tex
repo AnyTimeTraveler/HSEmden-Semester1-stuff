@@ -48,12 +48,12 @@
     \section{Aufgabe 1}
     \subsection{a)}
     \begin{align*}
-        L(A, z_0) &= \{11^*0^*,01^*0^* \mid \omega \in \Sigma^*\} \\
-        L(A, z_1) &= \{1^*0^* \mid \omega \in \Sigma^*\} \\
-        L(A, z_2) &= \{1^*0^* \mid \omega \in \Sigma^*\} \\
-        L(A, z_3) &= \{1^*0^* \mid \omega \in \Sigma^*\} \\
-        L(A, z_4) &= \{1^*0^* \mid \omega \in \Sigma^*\} \\
-        L(A, z_5) &= \{0^* \mid \omega \in \Sigma^*\} \\
+        L(A, z_0) &= \{a 1 L(A, z_1) \lor a 0 L(A, z_2)\mid a \in \{00, 10\}^*\} \\
+        L(A, z_1) &= \{1^n 0^m \lor 0 L(A, z_0) \mid n,m \geq 1\} \\
+        L(A, z_2) &= \{1^n 0^m \lor 0 L(A, z_0) \mid n,m \geq 1\} \\
+        L(A, z_3) &= \{1^n 0^m \mid n \geq 0, m \geq 1\} \\
+        L(A, z_4) &= \{1^n 0^m \mid n \geq 0, m \geq 1\} \\
+        L(A, z_5) &= \{0^n \mid n \geq 0\} \\
         L(A, z_6) &= \emptyset \\
     \end{align*}
 
@@ -63,13 +63,13 @@
     \begin{tabular}{c|ccccccc}
         ~ & $z_0$ & $z_1$ & $z_2$ & $z_3$ & $z_4$ & $z_5$ & $z_6$ \\
         \hline
-        $z_0$ & \equiv    & X & X & X & X & X & X     \\
-        $z_1$ & ~ & \equiv    & \equiv & X & X & X & X     \\
-        $z_2$ & ~ & ~ & \equiv    & X & X & X & X     \\
-        $z_3$ & ~ & ~ & ~ & \equiv    & \equiv & X & X     \\
-        $z_4$ & ~ & ~ & ~ & ~ & \equiv    & X & X     \\
-        $z_5$ & ~ & ~ & ~ & ~ & ~ & \equiv    & X     \\
-        $z_6$ & ~ & ~ & ~ & ~ & ~ & ~ & \equiv    \\
+        $z_0$ & $\equiv$    & X & X & X & X & X & X     \\
+        $z_1$ & ~ & $\equiv$    & $\equiv$ & X & X & X & X     \\
+        $z_2$ & ~ & ~ & $\equiv$    & X & X & X & X     \\
+        $z_3$ & ~ & ~ & ~ & $\equiv$    & $\equiv$ & X & X     \\
+        $z_4$ & ~ & ~ & ~ & ~ & $\equiv$    & X & X     \\
+        $z_5$ & ~ & ~ & ~ & ~ & ~ & $\equiv$    & X     \\
+        $z_6$ & ~ & ~ & ~ & ~ & ~ & ~ & $\equiv$    \\
     \end{tabular}
     \vspace{1cm}
     \begin{equation*}
@@ -88,8 +88,8 @@
         %\tikzstyle{every state}=[fill=red,draw=none,text=white]
 
         \node[initial,state] (z0)                           {$z_0$};
-        \node[state]         (z12) [right of=z0] {$z_{12}$};
-        \node[state]                (z34) [right of=z12]     {$z_{34}$};
+        \node[state]         (z12) [right of=z0] {$[z_1, z_2]$};
+        \node[state]                (z34) [right of=z12]     {$[z_3, z_4]$};
         \node[state,accepting]         (z5) [right of=z34]     {$z_5$};
         \node[state]         (z6) [right of=z5]       {$z_6$};
 
@@ -102,7 +102,7 @@
         edge [loop below]        node {1} (z3)
         (z5) edge node {1} (z6)
         edge [loop below]             node {0} (z5)
-        (z6) edge [loop below]      node {0,1} (z2)
+        (z6) edge [loop below]      node {0,1} (z2);
     \end{tikzpicture}
 
     \vspace{1cm}
@@ -129,7 +129,7 @@
         edge [loop below]        node {1} (z3)
         (z5) edge node {1} (z6)
         edge [loop below]             node {0} (z5)
-        (z6) edge [loop below]      node {0,1} (z2)
+        (z6) edge [loop below]      node {0,1} (z2);
     \end{tikzpicture}
 
 
@@ -194,12 +194,12 @@
     \begin{tabular}{c|cccccc}
         ~ & $z_0$ & $z_1$ & $z_2$ & $z_3$ & $z_5$ & $z_6$ \\
         \hline
-        $z_0$ & \equiv& X & \equiv & X & X & X     \\
-        $z_1$ & ~ & \equiv& X & X & X & X     \\
-        $z_2$ & ~ & ~ & \equiv& X & X & \equiv     \\
-        $z_3$ & ~ & ~ & ~ & \equiv& X & X     \\
-        $z_5$ & ~ & ~ & ~ & ~ & \equiv& X     \\
-        $z_6$ & ~ & ~ & ~ & ~ & ~ & \equiv    \\
+        $z_0$ & $\equiv$& X & $\equiv$ & X & X & X     \\
+        $z_1$ & ~ & $\equiv$& X & X & X & X     \\
+        $z_2$ & ~ & ~ & $\equiv$& X & X & $\equiv$     \\
+        $z_3$ & ~ & ~ & ~ & $\equiv$& X & X     \\
+        $z_5$ & ~ & ~ & ~ & ~ & $\equiv$& X     \\
+        $z_6$ & ~ & ~ & ~ & ~ & ~ & $\equiv$    \\
     \end{tabular}
     \vspace{1cm}
     \begin{equation*}
@@ -224,7 +224,7 @@
         edge node {1} (z3)
         (z3) edge node {0} (z5)
         edge [bend left] node {1} (z2)
-        (z5) edge [loop right]       node {0,1} (z5)
+        (z5) edge [loop right]       node {0,1} (z5);5
     \end{tikzpicture}
 
 
