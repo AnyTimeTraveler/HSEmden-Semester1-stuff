@@ -1,2 +1,10 @@
 .idea/
 
+*.aux
+*.synctex.gz
+*.log
+*.toc
+*.nav
+*.smn
+*.out
+
