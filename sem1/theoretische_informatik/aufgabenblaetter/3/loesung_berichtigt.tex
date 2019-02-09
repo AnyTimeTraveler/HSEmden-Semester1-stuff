@@ -1,0 +1,241 @@
+\documentclass{article}
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage[latin1]{inputenc}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\title{Theoretische Informatik \\ Aufgabenblatt 3 L\"oesung}
+\author{Lukas Pensler und Simon Struck}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Aufgabe 1}
+a) Weil die gleichen eingaben zu verschiedenen Ergebnissen Ergbenissen fuehren koennen. \\
+\\
+b) \\
+A1:
+\begin{center}
+
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+        \node[initial,state] (z0)                   			  {$z_0$};
+        \node[state]         (z1)           [right of=z0] {$z_{1}$};
+        \node[state,accepting] (z2) [right of=z1] 	            {$z_{2}$};
+
+
+
+        \path
+        (z0) edge [bend left]  node {0} (z1)
+        edge  [loop above] node {0,1} (z0)
+        (z1) edge      [bend left]        node {0} (z2);
+    \end{tikzpicture}
+
+\end{center}
+
+A2:
+\begin{center}
+
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+        \node[initial,state] (z0)                   			  {$z_0$};
+        \node[state]         (z1)           [right of=z0] {$z_{1}$};
+        \node[state]         (z2)           [right of=z1] {$z_{2}$};
+        \node[state,accepting] (z3) [right of=z2] 	            {$z_{3}$};
+
+
+
+        \path
+        (z0) edge [bend left]  node {1} (z1)
+        edge  [loop above] node {0,1} (z0)
+        (z1) edge      [bend left]        node {0} (z2)
+        (z2) edge      [bend left]        node {1} (z3)
+        (z3) edge      [loop above]        node {0,1} (z3);
+    \end{tikzpicture}
+
+\end{center}
+
+
+
+c)
+\begin{align*}
+    L_{NEA}(A1)&=\{\omega01 | \omega \in \{0,1\} ^\ast \} \\
+    L_{NEA}(A2)&=\{\omega ^\ast 101 \omega ^\ast | \omega \in \{0,1\} \}
+\end{align*}
+\\
+d) \\
+A1:
+
+\begin{tabular}{c|cc}
+    ~ & 0 & 1 \\
+    \hline
+    $z_0$ & $z_{01}$ & $z_0$ \\
+    $z_{01}$ & $z_{01}$ & $z_{02}$  \\
+    $z_{02E}$ & $z_{01}$ & $z_0$     \\
+\end{tabular}
+\vspace{1cm}\\
+A2:
+
+\begin{tabular}{c|cc}
+    ~ & 0 & 1 \\
+    \hline
+    $z_0$ & $z_{0}$ & $z_{01}$ \\
+    $z_{01}$ & $z_{02}$ & $z_{01}$  \\
+    $z_{02}$ & $z_{0}$ & $z_{013}$  \\
+    $z_{013E}$ & $z_{023}$ & $z_{013}$  \\
+    $z_{023E}$ & $z_{03}$ & $z_{013}$     \\
+    $z_{03E}$ & $z_{03}$ & $z_{013}$     \\
+\end{tabular}
+
+
+Minimiert:
+
+\begin{tabular}{c|cc}
+    ~ & 0 & 1 \\
+    \hline
+    $z_0$ & $z_{0}$ & $z_{01}$ \\
+    $z_{01}$ & $z_{02}$ & $z_{01}$  \\
+    $z_{02}$ & $z_{0}$ & $z_{013}$  \\
+    $z_{0123E}$ & $z_{0123}$ & $z_{0123}$  \\
+\end{tabular}
+\newpage
+A1:\\
+
+\begin{center}
+
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+    \node[initial,state] (z0)                   			  {$z_0$};
+    \node[state]         (z01)           [right of=z0] {$z_{01}$};
+    \node[state,accepting]          (z02) [right of=z01] 	            {$z_{02}$};
+
+
+
+    \path
+    (z0) edge   node {0} (z01)
+    edge  [loop above] node {1} (z0)
+    (z01) edge      [bend left]        node {1} (z02)
+    edge [loop above]			  node {0} (z01)
+    (z02) edge [bend left]			 node {1} (z0)
+    edge node  {0} (z01);
+\end{tikzpicture}
+
+\end{center}
+
+A2:
+\begin{center}
+
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+semithick]
+    %\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+    \node[initial,state] (z0){$z_0$};
+    \node[state]          (z01) [right of=z0]         {$z_{01}$};
+    \node[state]          (z02)   [below of=z01]       {$z_{02}$};
+    \node[state,accepting]          (z013)   [left of=z02]       {$z_{013}$};
+    \node[state,accepting]          (z023)   [below of=z013]       {$z_{023}$};
+    \node[state,accepting]         (z03)     [right of=z023]   {$z_03$};
+
+
+    \path
+    (z0) edge   node {0} (z01)
+    edge [loop above] node {1} (z0)
+    (z01) edge   [loop above]           node {1} (z01)
+    edge node {0} (z02)
+    (z02) edge             node {1} (z013)
+    edge node {0} (z0)
+    (z013) edge  [loop above]  node {1} (z013)
+    edge [bend left] node {0} (z023)
+    (z023) edge   [bend left]         node {1} (z013)
+    edge node {0} (z03)
+    (z03) edge   [loop above]           node {0} (z03)
+    edge  node {1} (z013)
+
+
+
+    ;
+\end{tikzpicture}
+
+\end{center}
+
+\section{Aufgabe 2}
+a)\\
+\begin{align*}
+    L=\{aa^{nb^m|n,m \geq 0\}}
+\end{align*}
+
+\begin{center}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+\node[initial,state] (z0)                   			  {$z_0$};
+\node[state]         (z1)           [right of=z0] {$z_{1}$};
+\node[state,accepting]  (z2) [right of=z1] 	            {$z_{2}$};
+
+
+
+\path
+(z0) edge   node {a} (z1)
+(z1) edge      [bend left]        node {b} (z2)
+edge [loop above]			  node {a} (z1)
+edge [bend right] node {$\varepsilon$} (z2)
+(z2) edge [loop above]			 node {b} (z2);
+\end{tikzpicture}
+
+\end{center}
+\newpage
+b)
+NEA: \\
+\begin{center}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+    \node[initial,state] (z0)                   			  {$z_0$};
+    \node[state,accepting]         (z1)           [right of=z0] {$z_{1}$};
+    \node[state,accepting]  (z2) [right of=z1] 	            {$z_{2}$};
+
+
+
+    \path
+    (z0) edge   node {a} (z1)
+    (z1) edge      [bend left]        node {b} (z2)
+    edge [loop above]			  node {a} (z1)
+    (z2) edge [loop above]			 node {b} (z2);
+\end{tikzpicture}
+
+\end{center}
+
+DEA: \\
+    \begin{center}
+        \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+
+            \node[initial,state] (z0)                   			  {$z_0$};
+            \node[state,accepting]         (z1)           [right of=z0] {$z_{1}$};
+            \node[state,accepting]  (z2) [right of=z1] 	            {$z_{2}$};
+            \node[state] (zF) [right of=z2] {$z_F$};
+
+
+
+            \path
+            (z0) edge   node {a} (z1)
+            edge [bend right] node {b} (zF)
+            (z1) edge      [bend left]        node {b} (z2)
+            edge [loop above]			  node {a} (z1)
+            (z2) edge [loop above]			 node {b} (z2)
+            edge node {a} (zF)
+            (zF) edge [loop above] node {a,b} (zF);
+        \end{tikzpicture}
+    \end{center}
+
+\end{document}

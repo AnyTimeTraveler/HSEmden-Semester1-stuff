@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\usepackage[european]{circuitikz}
+
+
+\begin{document}
+	\begin{center}
+		\begin{circuitikz}
+			\draw (0,0) to[R] (2,0);
+			\draw (2,2) to[V] (0,2);
+	\end{circuitikz}
+ \end{center}
+
+	\begin{circuitikz}
+		\draw (2,0) node[npn,nobase](npn){};
+		\draw (npn.E) node[below]{E};
+		\draw (npn.C) node[above]{C};
+		\draw (npn.B) node[circ]{} node[left]{B};
+		\draw[dashed,red,-latex] (1,0.5)--(npn.nobase);
+	\end{circuitikz}
+\end{document}

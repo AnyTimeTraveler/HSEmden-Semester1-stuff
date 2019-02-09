@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 \documentclass[mathserif,9pt]{article}
+=======
+\documentclass[mathserif,9pt]{beamer}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}        % German style for date, sections ...
@@ -8,8 +12,13 @@
 % Teilweise nützeliche Pakete:
 %\usepackage[USenglish,english,ngerman]{babel}
 %\usepackage{fancyhdr}
+<<<<<<< HEAD
 \usepackage{hyperref}
 \usepackage{graphicx}
+=======
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
 %\usepackage{array}
 \usepackage{tikz}
 \usepackage{verbatim}
@@ -25,6 +34,7 @@
 %\usepackage{lmodern}
 %\usepackage{hvfloat}
 \usepackage{tabularx}
+<<<<<<< HEAD
 % \usepackage{bibgerm}
 %\usepackage{listings}
 %\usepackage{color}
@@ -34,6 +44,15 @@
 
 \usepackage{fbtechnik-slides-100917}
 % \usepackage{graphicx}    % custom beamer style file: HS Emden/Leer
+=======
+%\usepackage{bibgerm}
+%\usepackage{listings}
+%\usepackage{color}
+% \usepackage{tocloft} Errors!
+
+\usepackage{fbtechnik-slides-100917}
+\usepackage{graphicx}    % custom beamer style file: HS Emden/Leer
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
 
 \title[Einarmiger Arduit]{Einarmiger Arduit}
 \subtitle{Glücksspiel kann Süchtig machen}
@@ -54,13 +73,21 @@
     \begin{frame}{Inhalt}
         %\begin{eblock}
         %\vspace{-1em}
+<<<<<<< HEAD
         \tableofcontents
+=======
+        \tableofcontents{}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
         %[hideallsubsections]
         %\end{eblock}
     \end{frame}
 
     \section{Wortschöpfung}
     \begin{frame}{}
+<<<<<<< HEAD
+=======
+        %			\framesubtitle{NANANA}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
         \begin{block}{}
             \centering
             \Huge{
@@ -73,15 +100,21 @@
     \end{frame}
 
     \section{Unser Ziel}
+<<<<<<< HEAD
     
     \begin{frame}{Unser Ziel}
         \begin{block}{} %Einarmiger Bandit mit einem Arduino und 7-Segment Displays
            \begin{minipage}[c]{0.6\textwidth}
+=======
+    \begin{frame}{Unser Ziel}
+        \begin{block}{Einarmiger Bandit mit einem Arduino und 7-Segment Displays}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
             \begin{itemize}
                 \item Spielekonsole nicht umsetzbar (zu teuer)
                 \item Echte Rollen zu teuer und zu komplex
                 \item LCD\,--\,Bildschirm nicht interessant genug
             \end{itemize}
+<<<<<<< HEAD
             \end{minipage}
             \hfill
             \begin{minipage}[c]{0.35\textwidth}
@@ -92,6 +125,8 @@
                     \label{fig:slot_mashine}
                 \end{figure}
             \end{minipage}
+=======
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
         \end{block}
     \end{frame}
 
@@ -102,15 +137,26 @@
             \begin{minipage}[c]{0.6\textwidth}
                 \begin{itemize}
                     \item 7-Segment-Displays simulieren Rollen
+<<<<<<< HEAD
                     \item Schieberegister in Daisychain für genug Ausgänge
                     \item Taster an Interupt-Pin 
+=======
+                    \item Schieberegister in daisychain für genug Ausgänge
+                    \item Taster an interupt-Pin 
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                 \end{itemize}
             \end{minipage}
             \hfill
             \begin{minipage}[c]{0.3\textwidth}
+<<<<<<< HEAD
                \begin{figure}
                     \includegraphics[width=\textwidth]{img/breadboard.jpg}
                     \caption[M2]{(M2) erster Test d. Segmentanzeigen}
+=======
+               \begin{figure} 
+                    \includegraphics[width=\textwidth]{img/breadboard.jpg}
+                    \caption{erster Test d. Segmentanzeigen}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                     \label{fig:breadboard}
                \end{figure}
             \end{minipage}
@@ -119,6 +165,7 @@
 
     \begin{frame}{Schaltung}
         \begin{block}{Displays und Schieberegister}
+<<<<<<< HEAD
                \begin{figure}
                     \centering
                     \includegraphics[height=0.5\paperheight]{img/bitshift-register_2x.png}
@@ -159,6 +206,21 @@
                     \caption[M6]{(M6) Schaltung der Taster}
                     \label{fig:taster_schaltung}
                \end{figure}
+=======
+            \begin{minipage}[c]{0.6\textwidth}
+                \begin{itemize}
+                    \item 
+                \end{itemize}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[c]{0.3\textwidth}
+               \begin{figure} 
+                    \includegraphics[width=\textwidth]{img/breadboard.jpg}
+                    \caption{erster Test d. Segmentanzeigen}
+                    \label{fig:breadboard}
+               \end{figure}
+            \end{minipage}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
         \end{block}
     \end{frame}
 
@@ -166,6 +228,7 @@
     \begin{frame}{Code}
         \begin{block}{}
             \begin{itemize}
+<<<<<<< HEAD
                 \item State Machine
                  \begin{itemize}
                     \item Kontrolliert Programmablauf und Animationen
@@ -178,6 +241,11 @@
                 \begin{itemize}
                     \item Durch Algorithmus generiert
                 \end{itemize}
+=======
+                \item State Machine --- Kontrolliert animationen
+                \item Interrupt --- Verarbeitet Input nur wenn welcher da ist
+                \item Animationen --- Durch Algorithmus generiert um Platz zu sparen
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
             \end{itemize}
         \end{block}
     \end{frame}
@@ -194,7 +262,11 @@
                       \node[state]            (z1) [right of=z0] {Spin up};
                       \node[state]            (z2) [below right of=z1] {Spinning};
                       \node[state]            (z3) [below left of=z2] {Spin down};
+<<<<<<< HEAD
                       \node[state]            (z4) [above left of=z3] {Result};
+=======
+                      \node[state]            (z4) [left of=z3] {Show Result};
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                     
                       \path (off) edge node        {} (z0)
                             (z0) edge node        {Hebel ziehen}   (z1)
@@ -204,7 +276,11 @@
                             (z4) edge node        {$\Delta t$} (z0)
                             (z4) edge node [swap] {Hebel ziehen} (z1);
                 \end{tikzpicture}
+<<<<<<< HEAD
                 \caption[M7]{(M7) Interne State Machine des Automaten}
+=======
+                \caption{Interne StateMachine des Automaten}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                 \label{gra:statemachine}
             \end{figure}
         \end{block}
@@ -221,7 +297,11 @@
             \begin{figure}
                 \centering
                 \includegraphics[height=0.4\paperheight]{img/gehause.png}
+<<<<<<< HEAD
                 \caption[M8]{(M8) Erste Version des Geh\"auses}
+=======
+                \caption{Erste Version des Geh\"auses}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                 \label{fig:gehausev1}
             \end{figure}
         \end{block}
@@ -232,7 +312,11 @@
             \begin{figure}
                 \centering
                 \includegraphics[height=0.5\paperheight]{img/gehause-version2.jpeg}
+<<<<<<< HEAD
                 \caption[M9]{(M9) Zweite Version des Geh\"auses}
+=======
+                \caption{Zweite Version des Geh\"auses}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
                 \label{fig:gehausev2}
             \end{figure}
         \end{block}
@@ -248,7 +332,10 @@
                 \includegraphics[width=3.5mm]{img/googledrive.png} & Google Drive & Dokumente teilen \\
                 \includegraphics[width=3.5mm]{img/platformio.png} & PlatformIO (Atom) & Quellcode editieren \\
                 \includegraphics[width=3.5mm]{img/trello.png} & Trello & Organisieren \\
+<<<<<<< HEAD
                 \includegraphics[width=3.5mm]{img/overleaf.png} & Overleaf & Präsentation erstellen % icon ändert sich eventuell bald wegen merge
+=======
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
             \end{tabular}
         \end{block}
     \end{frame}
@@ -256,6 +343,7 @@
     \begin{frame}
         \begin{block}{}
             \centering
+<<<<<<< HEAD
             {\fontsize{100}{120}\selectfont Demo}
         \end{block}
     \end{frame}
@@ -279,6 +367,29 @@
             \end{tabular}
         \end{block}
     \end{frame}
+=======
+						{\fontsize{51.59}{51.59}\selectfont Demo}
+        \end{block}
+    \end{frame}
+
+    \section{Fazit}
+    \begin{frame}
+        \begin{block}{Aktueller Fortschritt:}
+            \begin{itemize}{}
+                \item Code: In Arbeit
+                \item Gehäuse: Geplant
+                \item Schaltung: Prototyp im Bau
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    %\section{Abbildungsverzeichnis}
+    %\begin{frame}{Abbildungsverzeichnis}
+    %    \begin{block}{}
+    %    \listoffigures{}
+    %    \end{block}
+    %\end{frame}
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
     
     \begin{frame}{Ende}
         \begin{block}{Ende}
@@ -286,6 +397,7 @@
         \end{block}
     \end{frame}
 
+<<<<<<< HEAD
     \begin{frame}{Abbildungen}
     \end{frame}
 
@@ -296,4 +408,13 @@
     % 	\bibliographystyle{geralpha}
     % \end{frame}
 
+=======
+    \begin{frame}{Literatur}
+    	\footnotesize
+    	\nocite*
+      \bibliography{literatur}
+    	\bibliographystyle{geralpha}
+    \end{frame}
+
+>>>>>>> 55ae0ecb6e3b078190c81a0eadf9dc19052bc59b
 \end{document}
