@@ -1,0 +1,299 @@
+\documentclass[mathserif,9pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}        % German style for date, sections ...
+
+%\usepackage{helvet}
+
+% Teilweise nützeliche Pakete:
+%\usepackage[USenglish,english,ngerman]{babel}
+%\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+%\usepackage{array}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usetikzlibrary{arrows,automata}
+%\usepackage{fancyvrb}
+%\usepackage{ctable}
+%\usepackage{longtable}
+%\usepackage{hhline}
+%\usepackage{varioref}
+%\usepackage{wrapfig}
+%\usepackage{subfigure}
+%\usepackage{eurosym}
+%\usepackage{lmodern}
+%\usepackage{hvfloat}
+\usepackage{tabularx}
+% \usepackage{bibgerm}
+%\usepackage{listings}
+%\usepackage{color}
+% \usepackage{tocloft} Errors!
+% \usepackage[tocflat]{tocstyle}
+% \usetocstyle{standard}
+
+\usepackage{fbtechnik-slides-100917}
+% \usepackage{graphicx}    % custom beamer style file: HS Emden/Leer
+
+\title[Einarmiger Arduit]{Einarmiger Arduit}
+\subtitle{Glücksspiel kann Süchtig machen}
+\author{Arbeitstechniken Gruppe 64}
+\institute{Franziska Massmann \; Jonas Nikolić \; Lukas Pensler \; Simon Struck}
+\date{\today}
+
+%\date[31. August 2010]{\vspace{-30pt}\\31. August 2010\\[10pt]
+%{\scriptsize
+%\begin{tabular}{ll}
+%	Erstprüfer:	& Prof. Dr. ... \\
+%	Zweitprüfer:& Prof. Dr. ... \\
+%\end{tabular}\\[-0cm]}}
+
+\begin{document}
+    \titleframe        % custom title frame with background logo
+
+    \begin{frame}{Inhalt}
+        %\begin{eblock}
+        %\vspace{-1em}
+        \tableofcontents
+        %[hideallsubsections]
+        %\end{eblock}
+    \end{frame}
+
+    \section{Wortschöpfung}
+    \begin{frame}{}
+        \begin{block}{}
+            \centering
+            \Huge{
+            Einarmiger Bandit \\
+            + \\
+            Arduino \\
+            = \\
+            Einarmiger Arduit}
+        \end{block}
+    \end{frame}
+
+    \section{Unser Ziel}
+    
+    \begin{frame}{Unser Ziel}
+        \begin{block}{} %Einarmiger Bandit mit einem Arduino und 7-Segment Displays
+           \begin{minipage}[c]{0.6\textwidth}
+            \begin{itemize}
+                \item Spielekonsole nicht umsetzbar (zu teuer)
+                \item Echte Rollen zu teuer und zu komplex
+                \item LCD\,--\,Bildschirm nicht interessant genug
+            \end{itemize}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[c]{0.35\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=\textwidth]{img/slot-machine.png}
+                    \caption[M1]{(M1) Einarmiger Bandit}
+                    \label{fig:slot_mashine}
+                \end{figure}
+            \end{minipage}
+        \end{block}
+    \end{frame}
+
+    \section{Umsetzung}
+    \subsection{Schaltung}
+    \begin{frame}{Schaltung}
+        \begin{block}{}
+            \begin{minipage}[c]{0.6\textwidth}
+                \begin{itemize}
+                    \item 7-Segment-Displays simulieren Rollen
+                    \item Schieberegister in Daisychain für genug Ausgänge
+                    \item Taster an Interupt-Pin 
+                \end{itemize}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[c]{0.3\textwidth}
+               \begin{figure}
+                    \includegraphics[width=\textwidth]{img/breadboard.jpg}
+                    \caption[M2]{(M2) erster Test d. Segmentanzeigen}
+                    \label{fig:breadboard}
+               \end{figure}
+            \end{minipage}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Schaltung}
+        \begin{block}{Displays und Schieberegister}
+               \begin{figure}
+                    \centering
+                    \includegraphics[height=0.5\paperheight]{img/bitshift-register_2x.png}
+                    % Schaltung aufr\"aumen und hintergrund entfernen.
+                    \caption[M3]{(M3) Schaltung v. erster Test}
+                    \label{fig:bitshift_2x}
+               \end{figure}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Schaltung}
+        \begin{block}{Displays und Schieberegister}
+               \begin{figure}
+                    \centering
+                    \includegraphics[height=0.5\paperheight]{img/all-segments-soldered.jpg}
+                    \caption[M4]{(M4) fertige Schaltung der Displays}
+                    \label{fig:bitshift_all}
+               \end{figure}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{Schaltung}
+        \begin{block}{Taster}
+               \begin{figure}
+                    \centering
+                    \includegraphics[height=0.5\paperheight]{img/buttons-soldered.jpg}
+                    \caption[M5]{(M5) fertige Taster}
+                    \label{fig:taster}
+               \end{figure}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{Schaltung}
+        \begin{block}{Taster}
+               \begin{figure}
+                    \centering
+                    \includegraphics[height=0.5\paperheight]{img/taster_schaltung.png}
+                    \caption[M6]{(M6) Schaltung der Taster}
+                    \label{fig:taster_schaltung}
+               \end{figure}
+        \end{block}
+    \end{frame}
+
+    \subsection{Code}
+    \begin{frame}{Code}
+        \begin{block}{}
+            \begin{itemize}
+                \item State Machine
+                 \begin{itemize}
+                    \item Kontrolliert Programmablauf und Animationen
+                \end{itemize}
+                \item Interrupt Handling
+                \begin{itemize}
+                    \item Verarbeitet Input nur, wenn welcher vorhanden ist
+                \end{itemize}
+                \item Animationen
+                \begin{itemize}
+                    \item Durch Algorithmus generiert
+                \end{itemize}
+            \end{itemize}
+        \end{block}
+    \end{frame}
+    
+    \subsubsection*{State Machine}
+    \begin{frame}{State Machine}
+        \begin{block}{}
+            \begin{figure}
+                \centering
+                 \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, node distance=3cm, font=\footnotesize]
+                
+                      \node[initial,state]    (off)               {Off};
+                      \node[state]            (z0) [right of=off, node distance=2cm] {Idle};
+                      \node[state]            (z1) [right of=z0] {Spin up};
+                      \node[state]            (z2) [below right of=z1] {Spinning};
+                      \node[state]            (z3) [below left of=z2] {Spin down};
+                      \node[state]            (z4) [above left of=z3] {Result};
+                    
+                      \path (off) edge node        {} (z0)
+                            (z0) edge node        {Hebel ziehen}   (z1)
+                            (z1) edge node        {$\Delta t$} (z2)
+                            (z2) edge node        {$\Delta t$} (z3)
+                            (z3) edge node [swap] {$\Delta t$} (z4)
+                            (z4) edge node        {$\Delta t$} (z0)
+                            (z4) edge node [swap] {Hebel ziehen} (z1);
+                \end{tikzpicture}
+                \caption[M7]{(M7) Interne State Machine des Automaten}
+                \label{gra:statemachine}
+            \end{figure}
+        \end{block}
+    \end{frame}
+
+    \subsection{Gehäuse}
+    \begin{frame}{Gehäuse}
+        \begin{block}{}
+            \begin{itemize}
+                \item Stabiles und leichtes Material
+                \item Ergonomischer Bau
+                \item Auf dem Tisch platziert sollen Rollen auf Augenhöhe sein
+            \end{itemize}
+            \begin{figure}
+                \centering
+                \includegraphics[height=0.4\paperheight]{img/gehause.png}
+                \caption[M8]{(M8) Erste Version des Geh\"auses}
+                \label{fig:gehausev1}
+            \end{figure}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{Gehäuse}
+        \begin{block}{Version 2}
+            \begin{figure}
+                \centering
+                \includegraphics[height=0.5\paperheight]{img/gehause-version2.jpeg}
+                \caption[M9]{(M9) Zweite Version des Geh\"auses}
+                \label{fig:gehausev2}
+            \end{figure}
+        \end{block}
+    \end{frame}
+
+    \subsection{Software}
+    \begin{frame}{Software}
+        \begin{block}{}
+            \begin{tabular}{cll}
+                \includegraphics[width=3.5mm]{img/drawio.png} & Draw.io & Diagramme erstellen \\
+                \includegraphics[width=3.5mm]{img/fritzing.png} & Fritzing & Schaltung Design \\
+                \includegraphics[width=3.5mm]{img/github.png} & Github & Quellcode teilen \\
+                \includegraphics[width=3.5mm]{img/googledrive.png} & Google Drive & Dokumente teilen \\
+                \includegraphics[width=3.5mm]{img/platformio.png} & PlatformIO (Atom) & Quellcode editieren \\
+                \includegraphics[width=3.5mm]{img/trello.png} & Trello & Organisieren \\
+                \includegraphics[width=3.5mm]{img/overleaf.png} & Overleaf & Präsentation erstellen % icon ändert sich eventuell bald wegen merge
+            \end{tabular}
+        \end{block}
+    \end{frame}
+    \section{Demonstration}
+    \begin{frame}
+        \begin{block}{}
+            \centering
+            {\fontsize{100}{120}\selectfont Demo}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{Quellenverzeichnis}
+        \begin{block}{}
+            \footnotesize
+            \begin{tabular}{clc}
+                Material & Quelle & Seite \\
+                \hline
+                M\ref{fig:slot_mashine} & https://pixabay.com/de/spielautomat-gl\%C3\%BCcksspiel-spiele-2304135/ & \pageref{fig:slot_mashine} \\
+                M2 & Eigenes Bild & 5 \\
+                M3 & Erstellt mit Fritzing & 6 \\
+                M4 & Eigenes Bild & 7 \\
+                M5 & Eigenes Bild & 8 \\
+                M6 & Erstellt mit Fritzing & 9 \\
+                M7 & Erstellt mit \LaTeX & 10 \\
+                M8 & Erstellt mit Draw.io & 12 \\
+                M9 & Erstellt mit Draw.io & 13 \\
+                & Jeweils v. Webpage & 14
+            \end{tabular}
+        \end{block}
+    \end{frame}
+    
+    \begin{frame}{Ende}
+        \begin{block}{Ende}
+            Vielen Dank für Ihre Aufmerksamkeit \ldots
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Abbildungen}
+    \end{frame}
+
+    % \begin{frame}{Literatur}
+    % 	\footnotesize
+    % 	\nocite*
+    % 	\bibliography{literatur}
+    % 	\bibliographystyle{geralpha}
+    % \end{frame}
+
+\end{document}

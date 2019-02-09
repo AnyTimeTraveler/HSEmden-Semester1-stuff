@@ -1,0 +1,10 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Wortsch\IeC {\"o}pfung}{2}{section.1}
+\contentsline {section}{\numberline {2}Unser Ziel}{2}{section.2}
+\contentsline {section}{\numberline {3}Umsetzung}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Schaltung}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Code}{3}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Geh\IeC {\"a}use}{3}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Software}{10}{subsection.3.4}
+\contentsline {section}{\numberline {4}Demonstration}{10}{section.4}
+\babel@toc {ngerman}{}
